@@ -41,7 +41,7 @@ public class SearchController {
     public String getGerentesConExperienciaMayor5Anios(Model model) {
         List<GerenteDTO> gerentes = gerenteRepository.obtenerGerentesConExperiencia();
         model.addAttribute("gerentes", gerentes);
-        return "gerentes_mayor_5_anios"; // Nombre de la vista
+        return "gerente";
     }
 }
 
