@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/employees}">Empleados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/jobHistory}">Historial</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/report}">Reporte Visual</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<h2 class="mb-3">Lista de Empleados</h2>
+
+<button class="btn btn-primary mb-3">Nuevo Empleado</button>
+
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="searchInput" placeholder="Texto a buscar" onkeyup="filterTable()">
+  <button class="btn btn-outline-primary" type="button">Buscar</button>
+  <button class="btn btn-outline-danger" type="button">Limpiar</button>
+</div>
+
+<table class="table table-bordered table-hover" id="employeeTable">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Puesto</th>
+    <th>Departamento</th>
+    <th>Ciudad</th>
+    <th> </th>
+    <th> </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.employeeId}"></td>
+    <td th:text="${employee.firstName}"></td>
+    <td th:text="${employee.lastName}"></td>
+    <td th:text="${employee.jobTitle}"></td>
+    <td th:text="${employee.departmentName}"></td>
+    <td th:text="${employee.city}"></td>
+    <td>
+      <a th:href="@{'/employees/edit/' + ${employee.employeeId}}" class="btn btn-warning btn-sm">
+        Editar
+      </a>
+    </td>
+
+    <td>
+      <form th:action="@{'/employees/delete/' + ${employee.employeeId}}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
+        <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<script>
+  function filterTable() {
+    let input = document.getElementById("searchInput");
+    let filter = input.value.toLowerCase();
+    let table = document.getElementById("employeeTable");
+    let rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+      let cells = rows[i].getElementsByTagName("td");
+      let match = false;
+
+      for (let j = 0; j < cells.length - 2; j++) {
+        let cell = cells[j];
+        if (cell.textContent.toLowerCase().includes(filter)) {
+          match = true;
+          break;
+        }
+      }
+
+      if (match) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
