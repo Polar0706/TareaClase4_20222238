@@ -21,8 +21,8 @@
   <tr th:each="e : ${employee}">
     <td th:text="${e.firstName}"></td>
     <td th:text="${e.lastName}"></td>
-    <td th:text="${#dates.format(empleado.startDate, 'dd/MM/yyyy')}"></td>
-    <td th:text="${#dates.format(empleado.endDate, 'dd/MM/yyyy')}"></td>
+    <td th:text="${#dates.format(employee.startDate, 'dd/MM/yyyy')}"></td>
+    <td th:text="${#dates.format(employee.endDate, 'dd/MM/yyyy')}"></td>
     <td th:text="${e.jobTitle}"></td>
   </tr>
   </tbody>

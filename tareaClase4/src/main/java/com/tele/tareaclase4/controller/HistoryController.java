@@ -17,6 +17,6 @@ public class HistoryController {
     public String jobHistory(Model model) {
         List<HistoryDTO> history = jobHistoryRepository.obtenerHistorias();
         model.addAttribute("history", history);
-        return "employee_history";
+        return "history";
     }
 }

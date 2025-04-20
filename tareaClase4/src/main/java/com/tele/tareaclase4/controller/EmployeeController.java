@@ -19,6 +19,6 @@ public class EmployeeController {
     public String listEmployees(Model model) {
         List<EmployeeDTO> employees = employeeRepository.obtenerEmpleados();
         model.addAttribute("employees", employees);
-        return "employee_list";
+        return "list";
     }
 }

@@ -1,10 +1,10 @@
 package com.tele.tareaclase4.DTO;
 
 public interface EmployeeDTO {
-    Integer getEmployeeId();    // El identificador del empleado
-    String getFirstName();      // Nombre
-    String getLastName();       // Apellido
-    String getJobTitle();       // Puesto
-    String getDepartmentName(); // Departamento
+    Integer getEmployeeId();
+    String getFirstName();
+    String getLastName();
+    String getJobTitle();
+    String getDepartmentName();
     String getCity();
 }
